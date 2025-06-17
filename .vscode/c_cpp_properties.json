@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/huyen_rat_admin/nlcars_ws/install/ros_ign_interfaces/include/**",
+        "/home/huyen_rat_admin/nlcars_ws/install/ros_gz_sim/include/**",
+        "/home/huyen_rat_admin/nlcars_ws/install/ros_gz_bridge/include/**",
+        "/home/huyen_rat_admin/nlcars_ws/install/ros_gz_interfaces/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/huyen_rat_admin/nlcars_ws/src/ros2_gazebo_pkg/include/**",
+        "/home/huyen_rat_admin/nlcars_ws/src/ros_gz/ros_gz_bridge/include/**",
+        "/home/huyen_rat_admin/nlcars_ws/src/ros_gz/ros_gz_sim/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
