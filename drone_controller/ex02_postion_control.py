@@ -50,6 +50,39 @@ def generate_figure_eight_waypoints(num_points=7, A=2.0, B=2.0, H=2.0):
         waypoints.append([x, y, z])
     return waypoints
 
+
+def generate_cool_acrobatic_waypoints(
+    num_points=300, 
+    duration=15.0, 
+    offset=(5, 5, 3),
+    speed=1.0,
+    amp_x1=4.0, amp_x2=2.0,
+    amp_y1=3.0, amp_y2=1.5,
+    amp_z1=1.8, amp_z2=0.5,
+):
+    waypoints = []
+    t_vals = np.linspace(0, duration, num_points)
+    x_off, y_off, z_off = offset
+
+    for t in t_vals:
+        t_fast = speed * t  # scale time for faster/slower trajectory
+
+        # Twisting figure-8 style on x-y with amplitude parameters
+        x = amp_x1 * np.sin(2 * np.pi * 0.3 * t_fast) - amp_x2 * np.sin(2 * np.pi * 0.6 * t_fast)
+        y = amp_y1 * np.cos(2 * np.pi * 0.3 * t_fast) - amp_y2 * np.cos(2 * np.pi * 0.6 * t_fast)
+
+        # Vertical oscillation with amplitude parameters
+        z = 2 + amp_z1 * np.sin(2 * np.pi * 0.5 * t_fast) + amp_z2 * np.sin(2 * np.pi * 1.2 * t_fast)
+
+        # Add offsets
+        x += x_off
+        y += y_off
+        z += z_off
+
+        waypoints.append([x, y, z])
+
+    return waypoints
+
 class PositionController(Node):
     def __init__(self):
         super().__init__('Position_Controller')
@@ -90,12 +123,14 @@ class PositionController(Node):
 
         # Step 2: 
         # Set traj_type:
-        traj_type ="figure8" #"default", "figure8"
+        traj_type ="acrobatic" #"default", "figure8"
 
         if traj_type == "default":
             self.trajectory = generate_square_waypoints(size=3.0, height=4.0)
         elif traj_type =="figure8":
             self.trajectory = generate_figure_eight_waypoints(num_points=20, A=3.0, B=2.0, H=5.0)
+        elif traj_type =="acrobatic":
+            self.trajectory = generate_cool_acrobatic_waypoints(num_points=200, duration=20)
 
         #Step 3: 
         # Step 3.1: Get the feedback from gazebo
