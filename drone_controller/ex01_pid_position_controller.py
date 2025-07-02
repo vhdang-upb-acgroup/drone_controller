@@ -74,6 +74,9 @@ class PositionController(Node):
         self.pitch = None
         self.yaw = None
 
+        self.current_wp_idx = 0
+        self.wp_threshold = 0.05
+
 
 
         # Step 2: 
